@@ -99,4 +99,5 @@ def speechToTextGoogle(fileName, lang):
 
 speechToTextGoogle("0001.flac", "en")
 speechToTextGoogle("english.wav", "en")
+speechToTextGoogle("test.wav", "en")
 speechToTextGoogle("spanish.wav", "es")
