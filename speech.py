@@ -7,6 +7,12 @@ This is the code for the Curl request
 
 import requests
 import json
+'''
+https://pypi.python.org/pypi/SpeechRecognition/
+pip install pyaudio
+pip install speechrecognition
+'''
+import speech_recognition as sr
 
 '''
 curl -u <username>:<password> -X POST --header "Content-Type: audio/flac" --header "Transfer-Encoding: chunked" --data-binary @<path>0001.flac
@@ -59,9 +65,7 @@ def toneAnalizer(basetext):
     # Printing the transcription
     print(r.text)
 
-#toneAnalizer('Hi Team, I know the times are difficult! Our sales have been disappointing for the past three quarters for our data analytics product suite. We have a competitive data analytics product suite in the industry. But we need to do our job selling it!')
-
-
+'''
 #jsonTranscription = speechToText("0001.flac", "flac", "en")
 #jsonTranscription = speechToText("english.wav", "wav", "en")
 jsonTranscription = '{"results": [{"alternatives": [{"confidence": 0.899, "transcript": "you\'re a very interesting tool "}], "final": true}], "result_index": 0}'
@@ -71,4 +75,28 @@ print(jsonTranscription)
 transcription = result['results'][0]['alternatives'][0]['transcript']
 #['alternatives']['transcript']
 print(transcription)
+#toneAnalizer('Hi Team, I know the times are difficult! Our sales have been disappointing for the past three quarters for our data analytics product suite. We have a competitive data analytics product suite in the industry. But we need to do our job selling it!')
 toneAnalizer(transcription)
+'''
+
+'''
+Function using Google speech recognition software
+'''
+def speechToTextGoogle(fileName, lang):
+    r = sr.Recognizer()
+    with sr.WavFile('recordings/'+fileName) as source:
+        audio = r.record(source)  # read the entire WAV file
+    # recognize speech using Google Speech Recognition
+    try:
+        # for testing purposes, we're just using the default API key
+        # to use another API key, use `r.recognize_google(audio, key="GOOGLE_SPEECH_RECOGNITION_API_KEY")`
+        # instead of `r.recognize_google(audio)`
+        print("Google Speech Recognition thinks you said: " + r.recognize_google(audio,language=lang))
+    except sr.UnknownValueError:
+        print("Google Speech Recognition could not understand audio")
+    except sr.RequestError as e:
+        print("Could not request results from Google Speech Recognition service; {0}".format(e))
+
+speechToTextGoogle("0001.flac", "en")
+speechToTextGoogle("english.wav", "en")
+speechToTextGoogle("spanish.wav", "es")
