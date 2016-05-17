@@ -34,8 +34,8 @@ def speechToText(fileName, audioFormat, language):
     #For spanish
     #model=es - ES_BroadbandModel
     #Credentials on the Bluemix.net system
-    username = '49f75c60-f84d-42b7-9a0e-9a30b25283e0'
-    password = 'DpvjSDVtqw88'
+    username = ''
+    password = ''
     #Headers for the audio content
     headers = {'Content-Type': 'audio/'+audioFormat}
     #File to transcribe
@@ -74,7 +74,14 @@ def getTranscription(jsonTranscription):
 
 
 
+
+
 '''
+jsonTranscription = speechToText("english.wav", "wav", "en")
+transcription =getTranscription(jsonTranscription)
+toneAnalizer(transcription)
+jsonTranscription = speechToText("spanish.wav", "wav", "es")
+getTranscription(jsonTranscription)
 jsonTranscription = speechToText("english.wav", "wav", "en")
 getTranscription(jsonTranscription)
 
@@ -109,7 +116,17 @@ def speechToTextGoogle(fileName, lang):
     except sr.RequestError as e:
         print("Could not request results from Google Speech Recognition service; {0}".format(e))
 
+#speechToTextGoogle("0001.flac", "en")
+#toneAnalizer('Hi Team, I know the times are difficult! Our sales have been disappointing for the past three quarters for our data analytics product suite. We have a competitive data analytics product suite in the industry. But we need to do our job selling it!')
+
+#speechToTextGoogle("0001.flac", "en")
+
+#speechToTextGoogle("spanish.wav", "es")
+#speechToTextGoogle("0001.flac", "en")
+
+
 '''
+speechToTextGoogle("test.wav", "en")
 speechToTextGoogle("0001.flac", "en")
 speechToTextGoogle("english.wav", "en")
 speechToTextGoogle("test.wav", "en")
